@@ -19,31 +19,21 @@ public class MyAgent implements Agent
 			} else if (percepts.contains("DIRT")){
 				return "SUCK";
 			} else if (percepts.contains("BUMP")) {
-				if (ori == 0){ 	
-					ori = (ori+1)%4;
-					return "TURN_RIGHT"; }
+				if (ori == 0){ return turnRight(); }
 				else if (ori == 1){ 
 					isFinished = true;
 					return goHome(); } // GO home (But not nesseraly)
-				else if (ori == 2){ 	
-					ori = (ori-1)%4;
-					return "TURN_LEFT"; }
+				else if (ori == 2){ return turnLeft(); }
 				else { 	
 					isFinished = true;
 					return goHome(); } // GO home
 			} else if (ori == 1){
 				if (posY == 0){	
-					if (posX%2 == 0){	
-						System.out.print(String.format("%d)\n", posX%2));
-						ori = (ori-1)%4;
-						return "TURN_LEFT";
-					} else {
-					return go(); }
+					if (posX%2 == 0){ return turnLeft();
+					} else { return go(); }
 				}
-				if (posX%2 == 0){	return go(); } 
-				else {
-					ori = (ori+1)%4;
-					return "TURN_RIGHT"; }
+				if (posX%2 == 0){ return go(); } 
+				else {return turnRight(); }
 			} else {
 				return go();
 			}
