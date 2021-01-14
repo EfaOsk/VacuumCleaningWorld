@@ -11,50 +11,28 @@ public class MyAgent implements Agent
 		// 	System.out.print("'" + percept + "', ");
 		// }
 		// System.out.println("");
-		// String[] actions = { "TURN_ON", "TURN_OFF", "TURN_RIGHT", "TURN_LEFT", "GO", "SUCK" };
-		System.out.print(String.format("X: %d Y: %d (ori: %d)\n", posX, posY, ori));
 		if (!isFinished){
 			if (!isTurnedOn) {
 				isTurnedOn = true;
 				return "TURN_ON";
-			} else if (!isStarted) {
-				if (ori == 0) { return turnLeft(); }
-				else if (ori == 3) {
-					if (percepts.contains("BUMP")) { goBack(); return turnLeft(); }
-					return go();
-				} else if (ori == 2) {
-					if (percepts.contains("BUMP")) { 
-						goBack();
-						minY = posY;
-						return turnLeft(); }
-					return go();
-				} else { 
-					isStarted = true;
-					return turnLeft();
-				}
-			} else if (percepts.contains("DIRT")){
+			} else if (!isStarted) {					// Find the lower left corner
+				return goTOStartPos(percepts);
+			} else if (percepts.contains("DIRT")){		//  If you see durt, fkn pick it up!
 				return "SUCK";
-			} else if (percepts.contains("BUMP")) {
-				goBack(); 
-				if (ori == 0){ return turnRight(); }
-				else if (ori == 1){ 
-					isFinished = true;
-					return goHome(); } // GO home (But not nesseraly)
-				else if (ori == 2){ return turnLeft(); }
-				else { 	
-					isFinished = true;
-					return goHome(); } // GO home
+			} else if (percepts.contains("BUMP")) {  	// you hit a wall.
+				goBack(); 								// Take a step back
+				return continu();
 			} else if (ori == 1){
-				if (posY == minY){	
+				if (posY == minY){						// here we are saving a BUMB, why did I not do that on the way up?
 					if (posX%2 == 0){ return turnLeft();
 					} else { return go(); }
 				}
 				if (posX%2 == 0){ return go(); } 
 				else {return turnRight(); }
-			} else {
+			} else {									// If nothing is stoping you, just take a step forward
 				return go();
 			}
-		} else {
+		} else {										// We finnished cleaning, we are going home
 			return goHome();
 		}
 	}
@@ -122,5 +100,32 @@ public class MyAgent implements Agent
 				}
 			}
 		}
+	}
+	public String goTOStartPos(Collection<String> percepts) {
+		if (ori == 0) { return turnLeft(); }
+		else if (ori == 3) {
+			if (percepts.contains("BUMP")) { goBack(); return turnLeft(); }
+			return go();
+		} else if (ori == 2) {
+			if (percepts.contains("BUMP")) { 
+				goBack();
+				minY = posY;
+				return turnLeft(); }
+			return go();
+		} else { 
+			isStarted = true;
+			return turnLeft();
+		}
+	}
+	public String continu() {
+		// step forward and turn away from the wall, or quict
+		if (ori == 0){ return turnRight(); }
+		else if (ori == 1){ 
+			isFinished = true;
+			return goHome(); } // GO home
+		else if (ori == 2){ return turnLeft(); }
+		else { 	
+			isFinished = true;
+			return goHome(); } // GO home
 	}
 }
