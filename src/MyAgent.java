@@ -126,6 +126,8 @@ public class MyAgent implements Agent
 		else if (ori == 2){ return turnLeft(); }
 		else { 	
 			isFinished = true;
+			isFinished= false; // ready to start again
+			ori = 0; 		   // cheat a bit (Not nessasery)
 			return goHome(); } // GO home
 	}
 }
