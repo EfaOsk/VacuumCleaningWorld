@@ -1,3 +1,13 @@
+/*
+	T-622-ARTI Gervigreind
+	Valcume Cleaning World
+	Code for Agent.
+	Authors: 
+		Eva Ósk Gunnarsdóttir 				(evag18@ru.is)
+		Hólmfríður Magnea Hákonardóttir 	(holmfridurh17@ru.is)
+	Date: 1.17.2021
+*/
+
 import java.util.Collection;
 
 public class MyAgent implements Agent
@@ -6,11 +16,12 @@ public class MyAgent implements Agent
 	int posY = 0, posX = 0, ori = 0;
 	int minY = 0;
     public String nextAction(Collection<String> percepts) {
-		// System.out.print("perceiving:");
-		// for(String percept:percepts) {
-		// 	System.out.print("'" + percept + "', ");
-		// }
-		// System.out.println("");
+		System.out.print("perceiving:");
+		for(String percept:percepts) {
+			System.out.print("'" + percept + "', ");
+		}
+		System.out.println("");
+		// System.out.print(String.format("X: %d Y: %d (ori: %d)\n", posX, posY, ori));
 		if (!isFinished){
 			if (!isTurnedOn) {
 				isTurnedOn = true;
@@ -80,6 +91,7 @@ public class MyAgent implements Agent
 	public String goHome() {
 		if ((posX == 0) && (posY == 0)){
 			isStarted = false; // ready to start again
+			ori = 0;
 			return "TURN_OFF";
 		} else {
 			if (posY > 0) {
@@ -127,7 +139,6 @@ public class MyAgent implements Agent
 		else if (ori == 2){ return turnLeft(); }
 		else { 	
 			isFinished = true;
-			ori = 0; 		   // cheat a bit (Not nessasery)
 			return goHome(); } // GO home
 	}
 }
