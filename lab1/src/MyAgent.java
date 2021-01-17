@@ -28,7 +28,7 @@ public class MyAgent implements Agent
 				return "TURN_ON";
 			} else if (!isStarted) {					// Find the lower left corner
 				return goTOStartPos(percepts);
-			} else if (percepts.contains("DIRT")){		//  If you see durt, fkn pick it up!
+			} else if (percepts.contains("DIRT")){		//  If you see durt, clean it up!
 				return "SUCK";
 			} else if (percepts.contains("BUMP")) {  	// you hit a wall.
 				goBack(); 								// Take a step back
