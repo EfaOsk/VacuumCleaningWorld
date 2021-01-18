@@ -1,6 +1,6 @@
 /*
 	T-622-ARTI Gervigreind
-	Valcume Cleaning World
+	Vaccume Cleaning World
 	Code for Agent.
 	Authors: 
 		Eva Ósk Gunnarsdóttir 				(evag18@ru.is)
