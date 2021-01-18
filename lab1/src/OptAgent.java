@@ -1,11 +1,11 @@
 import java.util.Collection;
 
 
-public class OptAgent {
+public class OptAgent implements Agent {
     boolean isTurnedOn = false, isFinished= false, isStarted = false;
 	int posY = 0, posX = 0, ori = 0;
-
 	int X1, Y1, X2, Y2 = 0;
+	
     public String nextAction(Collection<String> percepts) {
 		
 		System.out.print("posX: " + posX + " posY: " + posY + " X1: " + X1 + " Y1: " + Y1 + " X2: " + X2 + " Y2: " + Y2 + " ori: " + ori);
