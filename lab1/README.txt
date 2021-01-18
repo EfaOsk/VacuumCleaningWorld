@@ -21,3 +21,6 @@ To change agents change line 12 in main.java
 
 To runn the code run 
 	java main.java
+
+for more info:
+	https://www.overleaf.com/read/xvjrfzszvqdt
